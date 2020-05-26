@@ -1,0 +1,7 @@
+apt-get install libgtk2.0-dev intltool 
+
+
+gcc -c plugin.c -fPIC `pkg-config --cflags geany` 
+
+gcc plugin.o -o plugin.so -shared `pkg-config --libs geany` 
+
