@@ -1,6 +1,7 @@
 /* License blob */
 #include <geanyplugin.h>
 #include <document.h>
+
 #include <ctype.h>
 #include <errno.h>
 #include <stdbool.h>
@@ -13,24 +14,30 @@
 
 //Special thanks to codebrainz(https://github.com/codebrainz) for creating the code-format plugin for C/C++
 //specially this part => https://github.com/codebrainz/code-format/blob/b13cdb372fdaa26cf67ab745317727e2881936eb/plugin.c#L315
-const char GO_FILE_EXTENSION[10] = "go";
+
 static void document_before_save(GObject *obj, GeanyDocument *doc, gpointer user_data)
 {
-	printf("Example: %s is about to be saved\n", DOC_FILENAME(doc));
-	
-	
-	int is_go_file_type = strcmp(doc->file_type->extension, GO_FILE_EXTENSION) == false;
-	if (doc == NULL)
-		doc = document_get_current();
-
 	if (!DOC_VALID(doc))
 	{
 		g_warning("Cannot format with no documents open");
 		return;
 	}
+
+	if(doc->file_type->id == GEANY_FILETYPES_NONE){
+		return;
+	}
+	
+		
+	int is_go_file_type = strcmp(doc->file_type->extension, "go") == false;
+	
+
+	if (doc == NULL){
+		doc = document_get_current();
+	}
+
 	if (is_go_file_type)
 	{
-
+		
 		GString *formatted;
 		ScintillaObject *sci;
 		size_t offset = 0, length = 0, sci_len;

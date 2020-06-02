@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "*.gohtml": "html",
+        "*.html": "html",
+        "*.tcc": "c",
+        "exception": "c",
+        "fstream": "c",
+        "iosfwd": "c",
+        "new": "c",
+        "ostream": "c",
+        "sstream": "c",
+        "streambuf": "c"
+    }
+}
